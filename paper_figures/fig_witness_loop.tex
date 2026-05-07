@@ -1,0 +1,61 @@
+% Witness-loop iterative re-evaluation mechanism.
+% Designed for single column.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  block/.style={
+    rectangle, rounded corners=2pt, draw=black!60, fill=black!5,
+    minimum width=2.6cm, minimum height=0.8cm, align=center
+  },
+  routebox/.style={
+    rectangle, draw=black!50, fill=white,
+    minimum width=2.0cm, minimum height=0.6cm, align=center,
+    font=\footnotesize
+  },
+  arrow/.style={-{Latex[length=2mm]}, black!70, line width=0.5pt},
+  routearrow/.style={-{Latex[length=2mm]}, black!50, line width=0.4pt, dashed},
+]
+
+% Initial verdict
+\node[block] (init) at (0, 3.0) {Initial 4-gate verdict};
+
+% Iterate decision
+\node[block] (iter) at (0, 1.5) {Examine reasoning};
+
+% Three routes back
+\node[routebox] (newpl)   at (-3.6, -0.2) {new defeater\\$\to$ Pl};
+\node[routebox] (newcomp) at (0,    -0.2) {new missing piece\\$\to$ Comp};
+\node[routebox] (newinv)  at (3.6,  -0.2) {new counterfactual\\$\to$ Inv};
+
+% Halt
+\node[block] (halt) at (0, -1.7) {Halt};
+
+% Cap
+\node[font=\scriptsize, black!60] at (4.5, 1.5) {hard cap: 3};
+
+% Flows
+\draw[arrow] (init.south) -- (iter.north);
+\draw[routearrow] (iter.south) -- ++(0,-0.4) -| (newpl.north);
+\draw[routearrow] (iter.south) -- (newcomp.north);
+\draw[routearrow] (iter.south) -- ++(0,-0.4) -| (newinv.north);
+
+\draw[routearrow] (newpl.south)   |- ++(0, -0.5) -| (init.south west);
+\draw[routearrow] (newcomp.south) |- ++(0, -0.5) -| (init.south);
+\draw[routearrow] (newinv.south)  |- ++(0, -0.5) -| (init.south east);
+
+\draw[arrow] (iter.east) .. controls +(2.5,0) and +(2.5,1.5) .. (halt.east)
+  node[midway, right, font=\footnotesize, black!70]
+  {settled: \\ no further \\ articulation};
+
+\end{tikzpicture}
+\caption{Witness-loop re-evaluation mechanism. After each round of gate
+verdicts, the judge inspects its own reasoning for new evidence: a new
+defeater routes back to Plausibility; a new missing piece to Completeness;
+a new counterfactual to Invariance. Iterations are capped at 3; most cases
+halt at iteration~1 with \texttt{halt\_reason} = \texttt{no\_further\_articulation}.
+This mechanic supports the rubric's recursive observer principle ---
+the reviewer is inside the evaluative loop and routes new evidence back
+to the relevant gate rather than collapsing to a single-pass verdict.}
+\label{fig:witness_loop}
+\end{figure}

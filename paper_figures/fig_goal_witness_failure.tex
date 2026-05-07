@@ -1,0 +1,72 @@
+% Goal-witness alignment failure schematic, using AS-v2 compositional regularization
+% as the canonical case study. Designed for full text-width.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  layer/.style={
+    rectangle, rounded corners=4pt, draw=black!60,
+    minimum width=6.5cm, minimum height=2.6cm, align=left
+  },
+  pass/.style={fill=black!8},
+  fail/.style={fill=black!22},
+  cellbox/.style={
+    rectangle, draw=black!40, fill=white,
+    minimum width=3.0cm, minimum height=0.7cm, align=center,
+    font=\footnotesize\ttfamily
+  },
+  goalcell/.style={cellbox, fill=black!8},
+  witcell/.style={cellbox, fill=black!22},
+  arrow/.style={-{Latex[length=2mm]}, black!70, line width=0.5pt},
+]
+
+% Headline panel
+\node[font=\small\bfseries] at (4.5, 5.5)
+  {AS-v2 Compositional Regularization (ICLR 2025 ICBINB workshop, accepted 6/7/6)};
+
+% Goal layer panel (left)
+\node[layer, pass] (goal) at (0, 3) {};
+\node[font=\small\bfseries, anchor=north west] at (-3.2, 4.2) {Goal layer};
+\node[align=left, font=\footnotesize, anchor=north west] at (-3.2, 3.7)
+  {Pl: pass --- defeatable, no consensus refutation \\
+   Coh: pass --- composes with regularization theory \\
+   Comp: pass --- hypothesis-shaped \\
+   Inv: pass --- could seed downstream programmes};
+\node[goalcell] (gc) at (0, 1.95) {cell 9 \\ fundamental\_result};
+
+% Witness layer panel (right)
+\node[layer, fail] (wit) at (9, 3) {};
+\node[font=\small\bfseries, anchor=north west] at (5.8, 4.2) {Witness layer};
+\node[align=left, font=\footnotesize, anchor=north west] at (5.8, 3.7)
+  {Pl: \textbf{fail} --- paper's own \S5 reports the \\
+   \quad regularization \emph{hurt} performance; \\
+   \quad dual-agent audit found 4 structural \\
+   \quad failures (eval validity, 57\% data overlap) \\
+   Coh / Comp / Inv: \textbf{cascade-blocked}};
+\node[witcell] (wc) at (9, 1.95) {cell 1 \\ total\_failure};
+
+% Connection: same artifact, two layers
+\draw[arrow, line width=0.7pt]
+  (gc.south) .. controls +(0,-0.6) and +(0,-0.6) .. (wc.south);
+\node[font=\footnotesize\itshape, black!70] at (4.5, 0.85)
+  {goal-witness alignment failure};
+
+% Comparison annotation
+\node[align=left, font=\footnotesize, anchor=north west, black!60] at (-3.2, 0.4)
+  {The published paper passed peer review at ICLR 2025 ICBINB \\
+   workshop with scores 6/7/6 (accept). The Discovery Tetrad \\
+   audit assigns the goal layer a fundamental\_result and the \\
+   witness layer a total\_failure --- exactly the structural mismatch \\
+   that one-shot accept/reject metrics cannot surface.};
+
+\end{tikzpicture}
+\caption{The canonical \emph{goal-witness alignment failure} pattern, illustrated
+on the AS-v2 Compositional Regularization paper. The audit cleanly separates
+the goal --- a coherent, defeatable, hypothesis-shaped, foundational
+research target --- from the witness, which fails on plausibility once the
+paper's own results are read carefully. The cascade rule then blocks the
+remaining gates. Peer review at ICLR 2025 ICBINB scored the paper 6/7/6
+(accept); the rubric registers the structural mismatch the headline metric
+hides.}
+\label{fig:goal_witness_failure}
+\end{figure}

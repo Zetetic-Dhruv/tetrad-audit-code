@@ -1,0 +1,2097 @@
+{
+  "_meta": {
+    "purpose": "Dispatch map for the Discovery Tetrad backward-audit run. Each pair is one parallel-agent unit. Per the authors 2026-05-07: NO pre-extraction of goals. Each agent reads goal_source FIRST to populate goals + map to witness, then evaluates witness, then emits one schema-valid JSON per goal into <substrate>/outputs/. The output filename is `<goal.id>.json`.",
+    "captured": "2026-05-07T10:22:41.234358Z",
+    "total_pairs": 131,
+    "agents_per_batch": 10,
+    "estimated_batches": 14,
+    "schema_note": "All file paths are RELATIVE to empirical_analysis/. supplementary_context entries are read by the agent for substrate-context but are not the primary goal/witness payload.",
+    "sequencing_per_pi_2026_05_07": [
+      "flt",
+      "slt",
+      "fp",
+      "asv2",
+      "asv1"
+    ],
+    "design_locks_2026_05_07": {
+      "flt_goal_source": "final.json (world model) + origin.json (typing plan) \u2014 agent reads these FIRST and does goal-to-witness mapping at runtime; witness = the .lean file",
+      "slt_goal_source": "fallback rule (no blueprint file exists in the SLT repo) \u2014 same .lean file is goal_source AND witness",
+      "fp_goal_source": "PDF (problem statement at top); witness = same PDF (proof body). NO step-level decomposition (the authors lock 2026-05-07: 'FP is 10 ONLY'). Existing GPT-as-judge yamls in fp/datasets/yaml/ are reserved for comparison appendix and are NOT fed to the agent for this run (avoids contamination).",
+      "asv1_goal_source": "ideas.json (~51 entries per paper); witness = paper.pdf",
+      "asv2_goal_source": "idea.json (Hypothesis field); witness = paper.pdf"
+    }
+  },
+  "counts_by_substrate": {
+    "flt": 53,
+    "slt": 55,
+    "fp": 10,
+    "asv1": 10,
+    "asv2": 3
+  },
+  "pairs": [
+    {
+      "id": "flt_basic",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Basic.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_bridge",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Bridge.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__amalgamation",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Amalgamation.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__borelanalyticbridge",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/BorelAnalyticBridge.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__compression",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Compression.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__dualvc",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/DualVC.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__finitesupportuc",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/FiniteSupportUC.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__gameinfra",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/GameInfra.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__generalization",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Generalization.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__generalizationresults",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/GeneralizationResults.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__interpolation",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Interpolation.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__littlestone",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Littlestone.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__measurability",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Measurability.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__mindchange",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/MindChange.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__ordinal",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Ordinal.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__rademacher",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Rademacher.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__structures",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Structures.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__symmetrization",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/Symmetrization.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_complexity__vcdimension",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Complexity/VCDimension.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_computation",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Computation.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_criterion",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Criterion.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_criterion__extended",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Criterion/Extended.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_criterion__gold",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Criterion/Gold.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_criterion__online",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Criterion/Online.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_criterion__pac",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Criterion/PAC.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_data",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Data.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__active",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Active.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__bayesian",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Bayesian.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__closure",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Closure.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__core",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Core.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__monad",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Monad.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__properties",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/Properties.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_learner__versionspace",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Learner/VersionSpace.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_process",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Process.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__analyticmeasurability",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/AnalyticMeasurability.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__approxminimax",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/ApproxMinimax.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__binarymatrix",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/BinaryMatrix.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__choquetcapacity",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/ChoquetCapacity.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__concentration",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/Concentration.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__exchangeability",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/Exchangeability.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__finitevcapprox",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/FiniteVCApprox.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__kldivergence",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/KLDivergence.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_puremath__readermonad",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/PureMath/ReaderMonad.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__borelanalyticseparation",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/BorelAnalyticSeparation.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__extended",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/Extended.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__gold",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/Gold.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__online",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/Online.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__pac",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/PAC.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__pacbayes",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/PACBayes.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "flt_theorem__separation",
+      "substrate": "flt",
+      "goal_source": [
+        "flt/premise/final.json",
+        "flt/premise/origin.json"
+      ],
+      "witness": [
+        "flt/proofs/Theorem/Separation.lean"
+      ],
+      "supplementary_context": [
+        "flt/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Read final.json (the FLT world model: paradigm_joints, structural_fractures, measurability_hierarchy, mathlib_bridges, resolved_sorrys, new_in_v2/v3/v3_2). Identify the named goals that map to this witness file using file_structure (L0-L7 + Bridge + PureMath layers list explicit file paths) and theorem-name inference. For each matched goal: populate the goal block from final.json's structure, then read the witness .lean file to evaluate the theorem statement and proof term. Emit one schema-valid JSON per matched goal, named `<goal.id>.json`, into flt/outputs/. Auxiliary lemmas in the witness file that are NOT named in final.json should NOT be emitted as separate goals."
+    },
+    {
+      "id": "slt_chaining",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/Chaining.lean"
+      ],
+      "witness": [
+        "slt/proofs/Chaining.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_convergencel1subseq",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/ConvergenceL1Subseq.lean"
+      ],
+      "witness": [
+        "slt/proofs/ConvergenceL1Subseq.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_coveringnumber",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/CoveringNumber.lean"
+      ],
+      "witness": [
+        "slt/proofs/CoveringNumber.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_dudley",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/Dudley.lean"
+      ],
+      "witness": [
+        "slt/proofs/Dudley.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_efronstein",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/EfronStein.lean"
+      ],
+      "witness": [
+        "slt/proofs/EfronStein.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__bernoullilsi",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/BernoulliLSI.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/BernoulliLSI.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__dualentapp",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/DualEntApp.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/DualEntApp.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__dualityentropy",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/DualityEntropy.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/DualityEntropy.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__entropy",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/Entropy.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/Entropy.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__onedimglsi",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/OneDimGLSI.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/OneDimGLSI.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__onedimglsicompsmo",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/OneDimGLSICompSmo.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/OneDimGLSICompSmo.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__subaddent__basic",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Basic.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Basic.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__subaddent__decomposition",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Decomposition.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Decomposition.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__subaddent__subadditivity",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Subadditivity.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/SubAddEnt/Subadditivity.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__tensorizedglsi",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/TensorizedGLSI.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/TensorizedGLSI.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlsi__twopoint",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLSI/TwoPoint.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLSI/TwoPoint.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianlipconcen",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianLipConcen.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianLipConcen.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianmeasure",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianMeasure.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianMeasure.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianpoincare__efronsteinapp",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianPoincare/EfronSteinApp.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianPoincare/EfronSteinApp.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianpoincare__levycontinuity",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianPoincare/LevyContinuity.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianPoincare/LevyContinuity.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianpoincare__limit",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianPoincare/Limit.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianPoincare/Limit.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianpoincare__rademacherapprox",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianPoincare/RademacherApprox.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianPoincare/RademacherApprox.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussianpoincare__taylorbound",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianPoincare/TaylorBound.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianPoincare/TaylorBound.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussiansobolevdense__cutoff",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianSobolevDense/Cutoff.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianSobolevDense/Cutoff.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussiansobolevdense__defs",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianSobolevDense/Defs.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianSobolevDense/Defs.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussiansobolevdense__density",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianSobolevDense/Density.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianSobolevDense/Density.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussiansobolevdense__lipschitzmollification",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianSobolevDense/LipschitzMollification.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianSobolevDense/LipschitzMollification.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_gaussiansobolevdense__mollification",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/GaussianSobolevDense/Mollification.lean"
+      ],
+      "witness": [
+        "slt/proofs/GaussianSobolevDense/Mollification.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__basicinequality",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/BasicInequality.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/BasicInequality.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__criticalradius",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/CriticalRadius.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/CriticalRadius.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__defs",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/Defs.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/Defs.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__dudleyapplication",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/DudleyApplication.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/DudleyApplication.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__l1regression__l1coveringbound",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/L1Regression/L1CoveringBound.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/L1Regression/L1CoveringBound.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__l1regression__l1designmatrix",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/L1Regression/L1DesignMatrix.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/L1Regression/L1DesignMatrix.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__l1regression__l1localizedball",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/L1Regression/L1LocalizedBall.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/L1Regression/L1LocalizedBall.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__l1regression__l1predictorclass",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/L1Regression/L1PredictorClass.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/L1Regression/L1PredictorClass.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__l1regression__l1shiftedclass",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/L1Regression/L1ShiftedClass.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/L1Regression/L1ShiftedClass.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__designmatrix",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/DesignMatrix.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/DesignMatrix.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__empiricalprocess",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/EmpiricalProcess.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/EmpiricalProcess.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__entropyintegral",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/EntropyIntegral.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/EntropyIntegral.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__euclideanreduction",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/EuclideanReduction.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/EuclideanReduction.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__gaussiancomplexity",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/GaussianComplexity.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/GaussianComplexity.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__integralbounds",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/IntegralBounds.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/IntegralBounds.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__linearpredictorclass",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/LinearPredictorClass.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/LinearPredictorClass.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__localizedball",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/LocalizedBall.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/LocalizedBall.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__linearregression__minimaxrate",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/LinearRegression/MinimaxRate.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/LinearRegression/MinimaxRate.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__localization",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/Localization.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/Localization.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__mastererrorbound",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/MasterErrorBound.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/MasterErrorBound.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_leastsquares__subgaussianity",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LeastSquares/SubGaussianity.lean"
+      ],
+      "witness": [
+        "slt/proofs/LeastSquares/SubGaussianity.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_lipschitzproperty",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/LipschitzProperty.lean"
+      ],
+      "witness": [
+        "slt/proofs/LipschitzProperty.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_measureinfrastructure",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/MeasureInfrastructure.lean"
+      ],
+      "witness": [
+        "slt/proofs/MeasureInfrastructure.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_metricentropy",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/MetricEntropy.lean"
+      ],
+      "witness": [
+        "slt/proofs/MetricEntropy.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_separablespacesup",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/SeparableSpaceSup.lean"
+      ],
+      "witness": [
+        "slt/proofs/SeparableSpaceSup.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_smallballprob",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/SmallBallProb.lean"
+      ],
+      "witness": [
+        "slt/proofs/SmallBallProb.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "slt_subgaussian",
+      "substrate": "slt",
+      "goal_source": [
+        "slt/proofs/SubGaussian.lean"
+      ],
+      "witness": [
+        "slt/proofs/SubGaussian.lean"
+      ],
+      "supplementary_context": [
+        "slt/SUBSTRATE_README.md",
+        "slt/figs/level-1.pdf",
+        "slt/figs/level-2.pdf"
+      ],
+      "extraction_policy": "No blueprint file in SLT (searched: blueprint, roadmap, overview, structure, plan, level \u2014 only figs/level-{1,2}.{pdf,jpg} found, which are visual diagrams from the README). the authors fallback applies: each Lean theorem statement IS its goal; the proof term is the witness; goal_source and witness are the same file. The README's 'Major Results' table cross-references 24 canonical theorems against Vershynin/Wainwright/Boucheron sources \u2014 use as priority list for goal extraction. figs/level-1 (localized empirical process framework) and figs/level-2 (implementation roadmap) provide visual context for mapping concrete theorems to abstract framework."
+    },
+    {
+      "id": "fp_problem_1",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P1.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P1.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_2",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P2.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P2.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_3",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P3.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P3.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_4",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P4.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P4.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_5",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P5.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P5.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_6",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P6.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P6.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_7",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P7.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P7.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_8",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P8.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P8.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_9",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P9.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P9.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "fp_problem_10",
+      "substrate": "fp",
+      "goal_source": [
+        "fp/proofs/zetesis_proof_attempt_P10.pdf"
+      ],
+      "witness": [
+        "fp/proofs/zetesis_proof_attempt_P10.pdf"
+      ],
+      "supplementary_context": [
+        "fp/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Goal = the problem statement at the top of the PDF. Witness = the proof body in the same PDF. Emit ONE JSON per problem (no step-level decomposition; set witnesses[].steps = null). The existing GPT-as-judge YAMLs in fp/datasets/yaml/ are reserved for the 3-way comparison appendix \u2014 DO NOT consult them; form verdicts independently from the PDF + SUBSTRATE_README context only."
+    },
+    {
+      "id": "asv1_adaptive_dual_scale_denoising",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/adaptive_dual_scale_denoising/ideas.json",
+        "asv1/papers/adaptive_dual_scale_denoising/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/adaptive_dual_scale_denoising/adaptive_dual_scale_denoising.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/adaptive_dual_scale_denoising/prompt.json",
+        "asv1/papers/adaptive_dual_scale_denoising/review.txt",
+        "asv1/papers/adaptive_dual_scale_denoising/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_data_augmentation_grokking",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/data_augmentation_grokking/ideas.json",
+        "asv1/papers/data_augmentation_grokking/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/data_augmentation_grokking/data_augmentation_grokking.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/data_augmentation_grokking/prompt.json",
+        "asv1/papers/data_augmentation_grokking/review.txt",
+        "asv1/papers/data_augmentation_grokking/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_dual_expert_denoiser",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/dual_expert_denoiser/ideas.json",
+        "asv1/papers/dual_expert_denoiser/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/dual_expert_denoiser/dual_expert_denoiser.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/dual_expert_denoiser/prompt.json",
+        "asv1/papers/dual_expert_denoiser/review.txt",
+        "asv1/papers/dual_expert_denoiser/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_gan_diffusion",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/gan_diffusion/ideas.json",
+        "asv1/papers/gan_diffusion/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/gan_diffusion/gan_diffusion.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/gan_diffusion/prompt.json",
+        "asv1/papers/gan_diffusion/review.txt",
+        "asv1/papers/gan_diffusion/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_grid_based_noise_adaptation",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/grid_based_noise_adaptation/ideas.json",
+        "asv1/papers/grid_based_noise_adaptation/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/grid_based_noise_adaptation/grid_based_noise_adaptation.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/grid_based_noise_adaptation/prompt.json",
+        "asv1/papers/grid_based_noise_adaptation/review.txt",
+        "asv1/papers/grid_based_noise_adaptation/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_layerwise_lr_grokking",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/layerwise_lr_grokking/ideas.json",
+        "asv1/papers/layerwise_lr_grokking/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/layerwise_lr_grokking/layerwise_lr_grokking.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/layerwise_lr_grokking/prompt.json",
+        "asv1/papers/layerwise_lr_grokking/review.txt",
+        "asv1/papers/layerwise_lr_grokking/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_mdl_grokking_correlation",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/mdl_grokking_correlation/ideas.json",
+        "asv1/papers/mdl_grokking_correlation/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/mdl_grokking_correlation/mdl_grokking_correlation.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/mdl_grokking_correlation/prompt.json",
+        "asv1/papers/mdl_grokking_correlation/review.txt",
+        "asv1/papers/mdl_grokking_correlation/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_multi_style_adapter",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/multi_style_adapter/ideas.json",
+        "asv1/papers/multi_style_adapter/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/multi_style_adapter/multi_style_adapter.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/multi_style_adapter/prompt.json",
+        "asv1/papers/multi_style_adapter/review.txt",
+        "asv1/papers/multi_style_adapter/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_rl_lr_adaptation",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/rl_lr_adaptation/ideas.json",
+        "asv1/papers/rl_lr_adaptation/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/rl_lr_adaptation/rl_lr_adaptation.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/rl_lr_adaptation/prompt.json",
+        "asv1/papers/rl_lr_adaptation/review.txt",
+        "asv1/papers/rl_lr_adaptation/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv1_weight_initialization_grokking",
+      "substrate": "asv1",
+      "goal_source": [
+        "asv1/papers/weight_initialization_grokking/ideas.json",
+        "asv1/papers/weight_initialization_grokking/seed_ideas.json"
+      ],
+      "goal_source_focus": "the idea that became the published paper (cross-reference paper title in ideas.json entries)",
+      "witness": [
+        "asv1/papers/weight_initialization_grokking/weight_initialization_grokking.pdf"
+      ],
+      "supplementary_context": [
+        "asv1/papers/weight_initialization_grokking/prompt.json",
+        "asv1/papers/weight_initialization_grokking/review.txt",
+        "asv1/papers/weight_initialization_grokking/notes.txt",
+        "asv1/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = the ideas.json entry whose Title matches the published paper. Sub-goals = arguments/sub-hypotheses reverse-engineered from the paper's own structure."
+    },
+    {
+      "id": "asv2_compositional_regularization",
+      "substrate": "asv2",
+      "goal_source": [
+        "asv2/compositional-regularization/idea.json",
+        "asv2/compositional-regularization/topic.md"
+      ],
+      "witness": [
+        "asv2/compositional-regularization/paper.pdf"
+      ],
+      "supplementary_context": [
+        "asv2/compositional-regularization/review.pdf",
+        "asv2/compositional-regularization/ai_reviews/",
+        "asv2/compositional-regularization/ideation_seed.py",
+        "asv2/compositional-regularization/inventory.md",
+        "asv2/INVENTORY.md",
+        "asv2/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = idea.json's Hypothesis. Sub-hypotheses + arguments reverse-engineered from paper.pdf."
+    },
+    {
+      "id": "asv2_pest_detection",
+      "substrate": "asv2",
+      "goal_source": [
+        "asv2/pest-detection/idea.json",
+        "asv2/pest-detection/topic.md"
+      ],
+      "witness": [
+        "asv2/pest-detection/paper.pdf"
+      ],
+      "supplementary_context": [
+        "asv2/pest-detection/review.pdf",
+        "asv2/pest-detection/ai_reviews/",
+        "asv2/pest-detection/ideation_seed.py",
+        "asv2/pest-detection/inventory.md",
+        "asv2/INVENTORY.md",
+        "asv2/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "Main goal = idea.json's Hypothesis. Sub-hypotheses + arguments reverse-engineered from paper.pdf."
+    },
+    {
+      "id": "asv2_label_noise",
+      "substrate": "asv2",
+      "goal_source": [
+        "asv2/label-noise/topic.md",
+        "asv2/label-noise/paper.pdf"
+      ],
+      "witness": [
+        "asv2/label-noise/paper.pdf"
+      ],
+      "supplementary_context": [
+        "asv2/label-noise/review.pdf",
+        "asv2/label-noise/ai_reviews/",
+        "asv2/label-noise/inventory.md",
+        "asv2/INVENTORY.md",
+        "asv2/SUBSTRATE_README.md"
+      ],
+      "extraction_policy": "the authors fallback rule applies: NO ideation JSON exists for label-noise (documented gap in asv2/INVENTORY.md \u2014 breaks the seed-to-paper provenance chain). Goal = reverse-engineered from the paper.pdf itself; specifically, treat the abstract's main claim as the goal, with sub-arguments extracted from the paper's section headers. Witness = paper.pdf body. topic.md provides workshop scope context only."
+    }
+  ]
+}

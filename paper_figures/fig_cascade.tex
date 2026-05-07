@@ -1,0 +1,59 @@
+% Witness-layer cascade rule illustration.
+% Designed for single column.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  gate/.style={
+    rectangle, rounded corners=2pt,
+    minimum width=1.6cm, minimum height=0.8cm, align=center,
+    draw=black!60
+  },
+  pass/.style={fill=black!8},
+  fail/.style={fill=black!25},
+  blocked/.style={fill=white, draw=black!30, dashed},
+  arrow/.style={-{Latex[length=2mm]}, black!70, line width=0.5pt},
+  blockarrow/.style={-{Latex[length=2mm]}, black!30, line width=0.5pt, dashed},
+  caselabel/.style={font=\footnotesize\itshape, black!60},
+]
+
+% Case A: Pl=Coh=Comp=1, Inv fires
+\node[caselabel] at (3.5, 4.6) {Case A: Pl = Coh = Comp = 1 $\Rightarrow$ Inv fires};
+\node[gate, pass] (a_pl)   at (1.0, 4.0) {Pl = 1};
+\node[gate, pass] (a_coh)  at (2.7, 4.0) {Coh = 1};
+\node[gate, pass] (a_comp) at (4.4, 4.0) {Comp = 1};
+\node[gate, pass] (a_inv)  at (6.1, 4.0) {Inv fires};
+\draw[arrow] (a_pl.east)   -- (a_coh.west);
+\draw[arrow] (a_coh.east)  -- (a_comp.west);
+\draw[arrow] (a_comp.east) -- (a_inv.west);
+
+% Case B: Pl=0 -> Inv blocked
+\node[caselabel] at (3.5, 2.7) {Case B: Pl = 0 $\Rightarrow$ Inv cascade-blocked};
+\node[gate, fail] (b_pl)    at (1.0, 2.1) {Pl = 0};
+\node[gate, pass] (b_coh)   at (2.7, 2.1) {Coh fires};
+\node[gate, pass] (b_comp)  at (4.4, 2.1) {Comp fires};
+\node[gate, blocked] (b_inv) at (6.1, 2.1) {Inv blocked};
+\draw[arrow] (b_pl.east)    -- (b_coh.west);
+\draw[arrow] (b_coh.east)   -- (b_comp.west);
+\draw[blockarrow] (b_comp.east) -- (b_inv.west);
+
+% Case C: Comp=0 -> Inv blocked
+\node[caselabel] at (3.5, 0.8) {Case C: Comp = 0 $\Rightarrow$ Inv cascade-blocked};
+\node[gate, pass] (c_pl)    at (1.0, 0.2) {Pl = 1};
+\node[gate, pass] (c_coh)   at (2.7, 0.2) {Coh = 1};
+\node[gate, fail] (c_comp)  at (4.4, 0.2) {Comp = 0};
+\node[gate, blocked] (c_inv) at (6.1, 0.2) {Inv blocked};
+\draw[arrow] (c_pl.east)    -- (c_coh.west);
+\draw[arrow] (c_coh.east)   -- (c_comp.west);
+\draw[blockarrow] (c_comp.east) -- (c_inv.west);
+
+\end{tikzpicture}
+\caption{Witness-layer cascade rule. Plausibility, Coherence, and
+Completeness fire independently. Invariance fires only if all three
+prerequisites pass (Case~A). When any prerequisite fails, Invariance is
+\emph{cascade-blocked}: \texttt{fired = false},
+\texttt{verdict = null}, \texttt{fired\_false\_reason = cascade\_blocked}.
+The cascade is asymmetric across layers --- the goal layer has no cascade,
+which is the source of the difference in cell counts (9 vs 16).}
+\label{fig:cascade}
+\end{figure}

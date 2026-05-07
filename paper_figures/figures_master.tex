@@ -1,0 +1,60 @@
+% Master test document for visual inspection of all paper figures.
+% Compiles all 9 figures in sequence as a single PDF. Drop into NeurIPS
+% style file by inputting individual \input{fig_*} files in the paper.
+%
+%   pdflatex figures_master.tex
+%   pdflatex figures_master.tex  % twice for cross-references
+%
+\documentclass[11pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{
+  arrows.meta,
+  positioning,
+  shapes.geometric,
+  decorations.pathreplacing,
+  calc
+}
+\usepackage{caption}
+\usepackage{booktabs}
+\captionsetup{font=small, labelfont=bf}
+
+\title{Discovery Tetrad — Paper Figures (Master Test File)}
+\author{(authors redacted for double-blind review)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent This document compiles all 9 paper figures for visual inspection.
+Each figure is also available as a standalone \texttt{.tex} fragment in
+\texttt{paper/figures/}; the paper input order is:
+
+\begin{enumerate}\itemsep0pt
+  \item \texttt{fig\_substrate\_inheritance.tex} — \S 4 setup overview.
+  \item \texttt{fig\_pipeline.tex} — \S 4 pipeline architecture.
+  \item \texttt{fig\_tetrad\_arch.tex} — \S 3 four-gate two-layer architecture.
+  \item \texttt{fig\_cell\_taxonomy.tex} — \S 3 25-cell verdict taxonomy.
+  \item \texttt{fig\_cascade.tex} — \S 3 witness-layer cascade rule.
+  \item \texttt{fig\_witness\_loop.tex} — \S 3 iterative re-evaluation.
+  \item \texttt{fig\_goal\_witness\_failure.tex} — \S 1 case study (compreg).
+  \item \texttt{fig\_sophism\_density.tex} — \S 5 headline result.
+  \item \texttt{fig\_cell\_heatmap.tex} — \S 5 cell occupancy across substrates.
+  \item \texttt{fig\_concordance.tex} — Appendix three-way concordance.
+\end{enumerate}
+
+\clearpage
+\input{fig_substrate_inheritance.tex}
+\input{fig_pipeline.tex}
+\input{fig_tetrad_arch.tex}
+\input{fig_cell_taxonomy.tex}
+\input{fig_cascade.tex}
+\input{fig_witness_loop.tex}
+\input{fig_goal_witness_failure.tex}
+\input{fig_sophism_density.tex}
+\input{fig_cell_heatmap.tex}
+\input{fig_concordance.tex}
+
+\end{document}

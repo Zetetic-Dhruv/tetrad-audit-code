@@ -1,0 +1,145 @@
+{
+  "_meta": {
+    "name": "Discovery Tetrad Assembly Mapping",
+    "version": "1.0",
+    "captured": "2026-05-07",
+    "purpose": "Verdict-bits → cell-number → cell-label proto-compiler. Single source of truth for the LLM-judge naming subprompt. Layer-aware. Reproduced verbatim inside judge_prompt.txt so the judge has it in context; this file is the canonical version for downstream tools (validation, aggregation, prompt regeneration).",
+    "labels_in_prose_match_labels_in_json": true,
+    "supersedes_label_changes": [
+      {"cell": "5A", "old": "working_hypothesis", "new": "proto_hypothesis", "reason": "Lab-science everyday-usage collision: working_hypothesis implies Coh=1, but cell 5A is Coh=0."},
+      {"cell": "5B", "old": "frontier_problem", "new": "frontier_direction", "reason": "Comp=0 makes this a directional call, not a template-shaped problem."}
+    ]
+  },
+
+  "gates": {
+    "Pl": {
+      "name": "Plausibility",
+      "abstract_question": "Defeatable?",
+      "abstract_definition": "Whether the goal/witness has things that could defeat it (defeasibility) and whether current evidence supports it. The literal question 'defeatable?' is the same at every level; only the operationalization changes.",
+      "default": "Pl=1 unless a trusted-source defeater is identified. In backward audit, score-docking from ceiling: assume plausibility unless evidence refutes.",
+      "values": {
+        "0": "Defeated — trusted-source refutation, current-consensus dispreference, or substrate-specific defeater identified",
+        "1": "Plausible — no current defeater in the evidence record"
+      }
+    },
+    "Coh": {
+      "name": "Coherence",
+      "abstract_question": "Composable?",
+      "abstract_definition": "Whether the goal/witness composes with at least one named specific mechanism. The qualifier 'named specific mechanism' is load-bearing — Coh is NOT global hand-wavy consistency. It is concrete composability with a particular existing mechanism in the substrate's vocabulary.",
+      "values": {
+        "0": "No named field mechanism captures it. Novel-by-mechanism-absence. (NOT 'internally inconsistent' — that is a Pl-failure or Comp-failure.)",
+        "1": "Composes with at least one named mechanism currently in the substrate's vocabulary"
+      }
+    },
+    "Comp": {
+      "name": "Completeness",
+      "abstract_question": "Comparable to template?",
+      "abstract_definition": "Whether the goal/witness is comparable to a known result template. Templates include theorem-shape, problem-shape, well-formed conjecture, and well-formed open question. Negative-result templates COUNT as templates (a closed negative result is template-shaped).",
+      "layer_specific_operationalization": {
+        "goal_layer": "Comparable to a goal-template (problem-shape, hypothesis-shape, well-formed conjecture, well-formed open question)",
+        "witness_layer": "Step closure plus DAG-pace advance (the witness reaches a closed sub-result and moves the proof DAG forward)"
+      },
+      "values": {
+        "0": "Not template-shaped; no closure or no canonical form",
+        "1": "Template-shaped — fits a recognizable result template (positive OR negative form)"
+      }
+    },
+    "Inv": {
+      "name": "Invariance",
+      "abstract_question": "Directional discovery?",
+      "abstract_definition": "Whether the commitment survives directional pressure from articulated alternatives. The literal question 'directional?' is the same at every level; the layer-specific manifestation specializes the question. This is specialization at instance, NOT a violation of gate-invariance.",
+      "layer_specific_operationalization": {
+        "witness_layer": "Transport survival — does the proof/argument transport beyond its immediate scope? Would a more general or illuminating proof have been attainable?",
+        "goal_layer": "Foundation potential — does the goal have potential to seed downstream goals?"
+      },
+      "values": {
+        "0": "Witness: does not survive transport. Goal: no foundation potential.",
+        "1": "Witness: survives transport. Goal: has foundation potential."
+      }
+    }
+  },
+
+  "cascade": {
+    "witness_layer": {
+      "rule": "Inv fires only if Pl=1 AND Coh=1 AND Comp=1. If any prerequisite is 0, set Inv.fired=false, Inv.verdict=null.",
+      "result": "9 cells (16 verdict vectors collapse to 9 because 7 vectors share Inv=N/A)"
+    },
+    "goal_layer": {
+      "rule": "All four gates fire INDEPENDENTLY. No cascade conditioning.",
+      "result": "16 cells (full 2^4 verdict-vector space)"
+    }
+  },
+
+  "encoding": {
+    "fired": "boolean — whether the gate was applicable in this evaluation context",
+    "verdict": {
+      "when_fired_true": "pass | fail | escalate",
+      "when_fired_false": "null"
+    },
+    "fired_false_reasons": {
+      "cascade_blocked": "An upstream gate failed, blocking the cascade (witness-layer Inv only)",
+      "structurally_inapplicable": "The gate is not applicable to the goal's class (e.g., goal-Inv on a pure-argument may default to escalate or fired=false)",
+      "axiom_pl_undefined": "Pl is undefined for pure axiom declarations"
+    },
+    "escalation_reasons": [
+      "insufficient_context",
+      "ambiguous_evidence",
+      "literature_outside_training_cutoff",
+      "subfield_judge_lacks_expertise",
+      "borderline_between_adjacent_cells"
+    ]
+  },
+
+  "witness_loop": {
+    "max_iterations": 3,
+    "halt_reasons": ["no_further_articulation", "max_iterations_reached"],
+    "operational_rule": "After initial verdict, if articulation reveals a new defeater, missing piece, or counterfactual, route the new evidence back to the relevant gate (defeater→Pl, missing piece→Comp, counterfactual→Inv) and re-evaluate. Halt early on no-articulation. Cap at 3 iterations."
+  },
+
+  "cell_mapping_witness_layer": {
+    "comment": "Cascade collapses 7 of 16 verdict vectors to Inv=N/A. Result: 9 cells. Cells 1-7 have Inv=N/A; cells 8-9 differentiate on Inv.",
+    "cells": [
+      {"id": 1, "Pl": 0, "Coh": 0, "Comp": 0, "Inv": "N/A", "label": "total_failure"},
+      {"id": 2, "Pl": 0, "Coh": 0, "Comp": 1, "Inv": "N/A", "label": "sophism"},
+      {"id": 3, "Pl": 0, "Coh": 1, "Comp": 0, "Inv": "N/A", "label": "hallucination"},
+      {"id": 4, "Pl": 0, "Coh": 1, "Comp": 1, "Inv": "N/A", "label": "counterfactual"},
+      {"id": 5, "Pl": 1, "Coh": 0, "Comp": 0, "Inv": "N/A", "label": "exploration_episode"},
+      {"id": 6, "Pl": 1, "Coh": 0, "Comp": 1, "Inv": "N/A", "label": "fallacy"},
+      {"id": 7, "Pl": 1, "Coh": 1, "Comp": 0, "Inv": "N/A", "label": "open_step"},
+      {"id": 8, "Pl": 1, "Coh": 1, "Comp": 1, "Inv": 0,     "label": "merely_true"},
+      {"id": 9, "Pl": 1, "Coh": 1, "Comp": 1, "Inv": 1,     "label": "established_result"}
+    ]
+  },
+
+  "cell_mapping_goal_layer": {
+    "comment": "All gates fire independently. 16 cells. Cells 8 and 9 use plain numbers (not A/B) because they only have one Inv variant each by convention.",
+    "cells": [
+      {"id": "1A", "Pl": 0, "Coh": 0, "Comp": 0, "Inv": 0, "label": "pseudo_problem"},
+      {"id": "1B", "Pl": 0, "Coh": 0, "Comp": 0, "Inv": 1, "label": "private_theory"},
+      {"id": "2A", "Pl": 0, "Coh": 0, "Comp": 1, "Inv": 0, "label": "zombie_theorem"},
+      {"id": "2B", "Pl": 0, "Coh": 0, "Comp": 1, "Inv": 1, "label": "bold_conjecture"},
+      {"id": "3A", "Pl": 0, "Coh": 1, "Comp": 0, "Inv": 0, "label": "idle_speculation"},
+      {"id": "3B", "Pl": 0, "Coh": 1, "Comp": 0, "Inv": 1, "label": "productive_speculation"},
+      {"id": "4A", "Pl": 0, "Coh": 1, "Comp": 1, "Inv": 0, "label": "closed_refutation"},
+      {"id": "4B", "Pl": 0, "Coh": 1, "Comp": 1, "Inv": 1, "label": "boundary_result"},
+      {"id": "5A", "Pl": 1, "Coh": 0, "Comp": 0, "Inv": 0, "label": "proto_hypothesis"},
+      {"id": "5B", "Pl": 1, "Coh": 0, "Comp": 0, "Inv": 1, "label": "frontier_direction"},
+      {"id": "6A", "Pl": 1, "Coh": 0, "Comp": 1, "Inv": 0, "label": "orphan_result"},
+      {"id": "6B", "Pl": 1, "Coh": 0, "Comp": 1, "Inv": 1, "label": "novel_discovery"},
+      {"id": "7A", "Pl": 1, "Coh": 1, "Comp": 0, "Inv": 0, "label": "minor_open_question"},
+      {"id": "7B", "Pl": 1, "Coh": 1, "Comp": 0, "Inv": 1, "label": "research_programme"},
+      {"id": "8",  "Pl": 1, "Coh": 1, "Comp": 1, "Inv": 0, "label": "supporting_argument"},
+      {"id": "9",  "Pl": 1, "Coh": 1, "Comp": 1, "Inv": 1, "label": "fundamental_result"}
+    ]
+  },
+
+  "escalation_policy": {
+    "rule": "Set verdict=escalate when the LLM-judge cannot make a competent call. Each escalation MUST include a documented reason in the reasoning field.",
+    "operational_check": "Per Bandy 2024 D&B precedent: a judge that NEVER escalates on long-corpus runs is not credible. Escalation should fire in predictable places (literature-sensitive Pl on AS-papers, Inv on field-level questions, edge cases between adjacent cells).",
+    "tracked_metrics": [
+      "escalation_rate_per_substrate",
+      "escalation_rate_per_gate",
+      "escalation_rate_per_goal_class"
+    ]
+  }
+}

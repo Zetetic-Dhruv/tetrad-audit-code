@@ -1,0 +1,80 @@
+% Discovery Tetrad architecture: 4 gates × 2 layers + cascade asymmetry.
+% Designed for full text-width in NeurIPS two-column layout.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  gate/.style={
+    rectangle, rounded corners=2pt, draw=black!60, fill=black!5,
+    minimum width=2.2cm, minimum height=0.8cm, align=center
+  },
+  layerlbl/.style={
+    rectangle, draw=black!50, fill=black!8,
+    minimum width=1.8cm, minimum height=0.6cm, align=center
+  },
+  cellbox/.style={
+    rectangle, draw=black!40, fill=white,
+    minimum width=2.0cm, minimum height=0.55cm, align=center,
+    font=\footnotesize
+  },
+  cascadearrow/.style={
+    -{Latex[length=2mm]}, dashed, black!60, line width=0.4pt
+  },
+  feed/.style={-{Latex[length=2mm]}, black!70, line width=0.5pt},
+]
+
+% Gates (top row)
+\node[gate] (pl)   at (0,0)   {Plausibility \\ \textit{defeatable?}};
+\node[gate] (coh)  at (3,0)   {Coherence \\ \textit{composable?}};
+\node[gate] (comp) at (6,0)   {Completeness \\ \textit{template?}};
+\node[gate] (inv)  at (9,0)   {Invariance \\ \textit{directional?}};
+
+% Goal layer (left side)
+\node[layerlbl] (goal) at (-2.5, -1.7) {\textbf{Goal layer}};
+\node[cellbox] (gout) at (-2.5, -2.6) {16 cells};
+
+% Goal layer arrows (independent firing — solid arrows from each gate)
+\foreach \g in {pl, coh, comp, inv} {
+  \draw[feed] (\g.south) -- ++(0,-0.4) -| (gout.north);
+}
+\node[font=\scriptsize, black!60] at (3, -1.3) {independent firing};
+
+% Witness layer (right side, lower)
+\node[layerlbl] (wit) at (-2.5, -4.8) {\textbf{Witness layer}};
+\node[cellbox] (wout) at (-2.5, -5.7) {9 cells};
+
+% Witness layer cascade: Pl/Coh/Comp fire, Inv depends on them
+\draw[feed] (pl.south)   -- ++(0,-3.6) -| (wout.north);
+\draw[feed] (coh.south)  -- ++(0,-3.7) -| (wout.north);
+\draw[feed] (comp.south) -- ++(0,-3.8) -| (wout.north);
+
+% Cascade dependency: Pl/Coh/Comp -> Inv (dashed)
+\draw[cascadearrow] (pl.south east)   .. controls +(0.4,-0.6) and +(-1.5,0.3) .. (inv.west);
+\draw[cascadearrow] (coh.south east)  .. controls +(0.4,-0.6) and +(-1.0,0.2) .. (inv.west);
+\draw[cascadearrow] (comp.south east) .. controls +(0.4,-0.6) and +(-0.5,0.1) .. (inv.west);
+
+\draw[feed] (inv.south) -- ++(0,-3.9) -| (wout.north);
+
+\node[font=\scriptsize, black!60] at (3, -4.5)
+  {cascade: Inv fires only if Pl=Coh=Comp=1};
+
+% Cells 8/9 layer-specialization annotation
+\node[font=\scriptsize, align=left, black!70] at (12.5, -2.6)
+  {bits $(1,1,1,0)$ $\to$ \texttt{supporting\_argument}\\
+   bits $(1,1,1,1)$ $\to$ \texttt{fundamental\_result}};
+\node[font=\scriptsize, align=left, black!70] at (12.5, -5.7)
+  {bits $(1,1,1,0)$ $\to$ \texttt{merely\_true}\\
+   bits $(1,1,1,1)$ $\to$ \texttt{established\_result}};
+
+\end{tikzpicture}
+\caption{The Discovery Tetrad: four invariant gates applied at two layers.
+At the goal layer, all four gates fire independently, producing a 16-cell
+verdict taxonomy. At the witness layer, Plausibility, Coherence, and
+Completeness fire independently, while Invariance fires only if all three
+prerequisites pass --- collapsing the verdict space to nine cells.
+The same verdict bits index different cell labels at the two layers because
+\textit{transport survival} (witness) and \textit{foundation potential}
+(goal) are layer-specific operationalizations of the same abstract gate
+question (\textit{directional?}).}
+\label{fig:tetrad_arch}
+\end{figure}

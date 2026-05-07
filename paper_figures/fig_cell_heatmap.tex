@@ -1,0 +1,84 @@
+% Cell-occupancy heatmap: substrate x cell counts at goal layer.
+% Pure TikZ matrix (no pgfplots) so the annotation logic is robust.
+% Designed for full text-width.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\footnotesize,
+  cell/.style={
+    rectangle, draw=black!30, line width=0.3pt,
+    minimum width=0.8cm, minimum height=0.6cm, align=center,
+    inner sep=0pt
+  },
+]
+
+% Cell list (16 columns)
+\def\cells{1A,1B,2A,2B,3A,3B,4A,4B,5A,5B,6A,6B,7A,7B,8,9}
+% Substrates (5 rows, top to bottom)
+\def\substrates{FLT,SLT,FP,AS-v2,AS-v1}
+
+% Counts data: row major.
+% Order: FLT, SLT, FP, AS-v2, AS-v1.
+% Cells: 1A 1B 2A 2B 3A 3B 4A 4B 5A 5B 6A 6B 7A 7B 8 9
+% (zero entries shown as empty cells)
+\def\dataFLT{0,0,2,0,0,0,3,0,0,0,0,1,2,0,7,93}
+\def\dataSLT{0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,78}
+\def\dataFP{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8}
+\def\dataASvtwo{0,0,0,0,0,0,2,0,0,0,0,0,0,1,4,7}
+\def\dataASvone{0,0,4,0,4,0,3,1,1,0,0,0,0,3,6,34}
+
+% Header row: cell ids
+\foreach \c [count=\i from 0] in 1A,1B,2A,2B,3A,3B,4A,4B,5A,5B,6A,6B,7A,7B,8,9 {
+  \node[font=\scriptsize, black!70] at (\i*0.8 + 0.4, 0.7) {\c};
+}
+
+% Substrate row labels
+\foreach \s [count=\j from 0] in FLT, SLT, FP, AS-v2, AS-v1 {
+  \node[font=\scriptsize\bfseries, anchor=east] at (-0.1, -\j*0.6) {\s};
+}
+
+% FLT row
+\foreach \v [count=\i from 0] in 0,0,2,0,0,0,3,0,0,0,0,1,2,0,7,93 {
+  \pgfmathtruncatemacro{\shade}{min(75, \v)}
+  \node[cell, fill=black!\shade] at (\i*0.8 + 0.4, 0) {%
+    \ifnum\v>0\textcolor{black!90}{\v}\fi};
+}
+% SLT row
+\foreach \v [count=\i from 0] in 0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,78 {
+  \pgfmathtruncatemacro{\shade}{min(75, \v)}
+  \node[cell, fill=black!\shade] at (\i*0.8 + 0.4, -0.6) {%
+    \ifnum\v>0\textcolor{black!90}{\v}\fi};
+}
+% FP row
+\foreach \v [count=\i from 0] in 0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8 {
+  \pgfmathtruncatemacro{\shade}{min(75, \v*8)}
+  \node[cell, fill=black!\shade] at (\i*0.8 + 0.4, -1.2) {%
+    \ifnum\v>0\textcolor{black!90}{\v}\fi};
+}
+% AS-v2 row
+\foreach \v [count=\i from 0] in 0,0,0,0,0,0,2,0,0,0,0,0,0,1,4,7 {
+  \pgfmathtruncatemacro{\shade}{min(75, \v*8)}
+  \node[cell, fill=black!\shade] at (\i*0.8 + 0.4, -1.8) {%
+    \ifnum\v>0\textcolor{black!90}{\v}\fi};
+}
+% AS-v1 row
+\foreach \v [count=\i from 0] in 0,0,4,0,4,0,3,1,1,0,0,0,0,3,6,34 {
+  \pgfmathtruncatemacro{\shade}{min(75, \v*2)}
+  \node[cell, fill=black!\shade] at (\i*0.8 + 0.4, -2.4) {%
+    \ifnum\v>0\textcolor{black!90}{\v}\fi};
+}
+
+% Axis labels
+\node[font=\small\bfseries] at (6.4, 1.4) {Goal-layer cell};
+
+\end{tikzpicture}
+\caption{Goal-layer cell-occupancy across the five substrates (282 records,
+counts shown). FLT and SLT concentrate in cell~9 (\texttt{fundamental\_result})
+with a small tail in cell~8 (\texttt{supporting\_argument}). The AS-v1 and
+AS-v2 substrates spread across cells 2A, 3A, 4A, 7B, 8, and 9 --- the
+failure-mode cells the rubric exists to resolve. The First-Proof substrate
+(FP) sits intermediate, with strong cell-9 occupancy and one cell-4B
+(\texttt{boundary\_result}) entry on Problem~5. Empty cells are zero;
+darker cells carry larger counts.}
+\label{fig:cell_heatmap}
+\end{figure}

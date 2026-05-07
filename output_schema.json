@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/discovery-tetrad/output_schema.json",
+  "title": "Discovery Tetrad per-goal audit output",
+  "description": "Locked schema for one JSON file per goal. Substrate-keyed in subfolders (fp/, flt/, slt/, asv1/, asv2/). Filename matches goal.id. Derived from empirical_analysis/SCHEMA.md §C-§E (2026-05-07 lock).",
+  "type": "object",
+  "required": ["schema_version", "goal", "tetrad_evaluation", "outcome", "witnesses"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "goal": {
+      "type": "object",
+      "required": ["id", "substrate", "type", "class", "parent_artifact", "source", "captured_at", "evaluator"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(fp|flt|slt|asv1|asv2)_(thm|prob|hyp|subhyp|arg)_[a-z0-9_]+(_[0-9]+)?$",
+          "maxLength": 80,
+          "description": "Deterministic id per SCHEMA.md §B. Also the filename stem."
+        },
+        "substrate": {"enum": ["fp", "flt", "slt", "asv1", "asv2"]},
+        "type": {"enum": ["thm", "prob", "hyp", "subhyp", "arg"]},
+        "class": {"enum": ["theorem", "problem", "hypothesis", "argument"]},
+        "parent_artifact": {"type": "string"},
+        "source": {
+          "type": "object",
+          "required": ["extraction_method", "location"],
+          "properties": {
+            "extraction_method": {"enum": ["ideation_json", "lean_theorem_decl", "fp_yaml", "paper_internal", "reverse_engineered_from_pdf"]},
+            "location": {"type": "string"},
+            "verbatim_quote": {"type": "string"}
+          }
+        },
+        "description": {"type": "string"},
+        "captured_at": {"type": "string", "format": "date-time"},
+        "evaluator": {"type": "string", "description": "e.g., 'llm_judge_claude-opus-4-7_t0.2'"}
+      }
+    },
+    "tetrad_evaluation": {
+      "$ref": "#/definitions/tetrad_evaluation",
+      "description": "Goal-layer evaluation: all four gates fire INDEPENDENTLY (no cascade). Cell ∈ goal-layer 16-cell taxonomy."
+    },
+    "witness_loop": {
+      "$ref": "#/definitions/witness_loop"
+    },
+    "outcome": {
+      "$ref": "#/definitions/outcome",
+      "description": "Goal-layer outcome. cell ∈ {1A, 1B, 2A, 2B, 3A, 3B, 4A, 4B, 5A, 5B, 6A, 6B, 7A, 7B, 8, 9}"
+    },
+    "witnesses": {
+      "type": "array",
+      "minItems": 0,
+      "items": {"$ref": "#/definitions/witness"}
+    }
+  },
+  "definitions": {
+    "gate_evaluation": {
+      "type": "object",
+      "required": ["fired", "verdict", "reasoning"],
+      "additionalProperties": false,
+      "properties": {
+        "fired": {"type": "boolean"},
+        "verdict": {
+          "oneOf": [
+            {"enum": ["pass", "fail", "escalate"]},
+            {"type": "null"}
+          ]
+        },
+        "fired_false_reason": {
+          "enum": ["cascade_blocked", "structurally_inapplicable", "axiom_pl_undefined", null]
+        },
+        "escalation_reason": {
+          "enum": ["insufficient_context", "ambiguous_evidence", "literature_outside_training_cutoff", "subfield_judge_lacks_expertise", "borderline_between_adjacent_cells", null]
+        },
+        "reasoning": {"type": "string", "description": "Multi-line justification for the verdict."},
+        "citations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source", "quote"],
+            "properties": {
+              "source": {"type": "string"},
+              "quote": {"type": "string"}
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"fired": {"const": true}}},
+          "then": {"properties": {"verdict": {"enum": ["pass", "fail", "escalate"]}}}
+        },
+        {
+          "if": {"properties": {"fired": {"const": false}}},
+          "then": {"properties": {"verdict": {"const": null}}}
+        }
+      ]
+    },
+    "tetrad_evaluation": {
+      "type": "object",
+      "required": ["plausibility", "coherence", "completeness", "invariance"],
+      "additionalProperties": false,
+      "properties": {
+        "plausibility": {"$ref": "#/definitions/gate_evaluation"},
+        "coherence": {"$ref": "#/definitions/gate_evaluation"},
+        "completeness": {"$ref": "#/definitions/gate_evaluation"},
+        "invariance": {"$ref": "#/definitions/gate_evaluation"}
+      }
+    },
+    "witness_loop": {
+      "type": "object",
+      "required": ["iterations", "settled", "halt_reason"],
+      "additionalProperties": false,
+      "properties": {
+        "iterations": {"type": "integer", "minimum": 1, "maximum": 3},
+        "settled": {"type": "boolean"},
+        "halt_reason": {"enum": ["no_further_articulation", "max_iterations_reached"]}
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["cell", "cell_name", "interpretation"],
+      "additionalProperties": false,
+      "properties": {
+        "cell": {
+          "oneOf": [
+            {"type": "integer", "minimum": 1, "maximum": 9, "description": "Witness-layer cell number"},
+            {"enum": ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B", "8", "9"], "description": "Goal-layer cell id"}
+          ]
+        },
+        "cell_name": {
+          "enum": [
+            "total_failure", "sophism", "hallucination", "counterfactual",
+            "exploration_episode", "fallacy", "open_step",
+            "merely_true", "established_result",
+            "pseudo_problem", "private_theory",
+            "zombie_theorem", "bold_conjecture",
+            "idle_speculation", "productive_speculation",
+            "closed_refutation", "boundary_result",
+            "proto_hypothesis", "frontier_direction",
+            "orphan_result", "novel_discovery",
+            "minor_open_question", "research_programme",
+            "supporting_argument", "fundamental_result"
+          ]
+        },
+        "interpretation": {"type": "string", "description": "1-3 sentence rendering of why this cell was assigned."},
+        "sophism_flag": {"type": "boolean", "description": "True if sophism detection rule fires (high-confidence refuted claim with template-shaped masking)."}
+      }
+    },
+    "witness": {
+      "type": "object",
+      "required": ["id", "source", "tetrad_evaluation", "outcome"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"},
+        "source": {"type": "string"},
+        "description": {"type": "string"},
+        "tetrad_evaluation": {
+          "$ref": "#/definitions/tetrad_evaluation",
+          "description": "Witness-layer evaluation: WITH cascade. Inv fires only if Pl=Coh=Comp=1."
+        },
+        "witness_loop": {"$ref": "#/definitions/witness_loop"},
+        "outcome": {
+          "$ref": "#/definitions/outcome",
+          "description": "Witness-layer outcome. cell ∈ {1, 2, 3, 4, 5, 6, 7, 8, 9}"
+        },
+        "steps": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "array", "items": {"$ref": "#/definitions/step"}}
+          ]
+        }
+      }
+    },
+    "step": {
+      "type": "object",
+      "required": ["id", "source", "tetrad_evaluation", "outcome"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"},
+        "source": {"type": "string"},
+        "description": {"type": "string"},
+        "tetrad_evaluation": {"$ref": "#/definitions/tetrad_evaluation"},
+        "outcome": {"$ref": "#/definitions/outcome"}
+      },
+      "description": "FP-only at present. Step is a mini-witness using the witness-layer cell taxonomy."
+    }
+  }
+}

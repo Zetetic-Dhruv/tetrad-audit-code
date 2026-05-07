@@ -1,0 +1,88 @@
+% Pipeline architecture: dispatch -> orchestrator -> judge -> output -> validation+aggregation.
+% Designed for full text-width.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  block/.style={
+    rectangle, rounded corners=2pt, draw=black!60, fill=black!5,
+    minimum width=2.4cm, minimum height=0.9cm, align=center
+  },
+  contract/.style={
+    rectangle, draw=black!50, fill=black!12,
+    minimum width=2.0cm, minimum height=0.6cm, align=center,
+    font=\scriptsize
+  },
+  data/.style={
+    cylinder, shape border rotate=90, aspect=0.25,
+    draw=black!50, fill=white, minimum width=2.0cm, minimum height=1.0cm,
+    align=center, font=\scriptsize
+  },
+  flow/.style={-{Latex[length=2.5mm]}, black!70, line width=0.6pt},
+  contractflow/.style={-{Latex[length=2mm]}, dashed, black!50, line width=0.4pt},
+]
+
+% Top row: substrate sources
+\node[data] (sub) at (0, 1.6) {5 substrates\\\scriptsize FLT, SLT, FP, AS-v1, AS-v2};
+
+% Dispatch map
+\node[block] (disp) at (3.4, 1.6) {\texttt{dispatch\_map.json}\\\scriptsize 131 pairs};
+
+% Orchestrator
+\node[block] (orch) at (7.0, 1.6) {orchestrator};
+
+% Judge
+\node[block] (judge) at (10.4, 1.6) {LLM-judge\\\scriptsize Claude Opus 4.7};
+
+% Outputs
+\node[data] (out) at (13.6, 1.6) {output JSONs\\\scriptsize 282 records};
+
+% Frozen contracts (middle row, feed into judge)
+\node[contract] (jp)  at (5.5, -0.4) {\texttt{judge\_prompt.txt}};
+\node[contract] (am)  at (8.0, -0.4) {\texttt{assembly\_mapping.json}};
+\node[contract] (os)  at (10.5, -0.4) {\texttt{output\_schema.json}};
+
+% Bottom row: post-processing
+\node[block] (val)   at (10.4, -2.4) {\texttt{validate\_outputs.py}};
+\node[block] (agg)   at (13.6, -2.4) {\texttt{aggregate\_stats.py}};
+\node[data]  (paper) at (16.6, -0.4) {paper\\\scriptsize\S5 + \S B};
+
+% Top-row flows
+\draw[flow] (sub) -- (disp);
+\draw[flow] (disp) -- (orch);
+\draw[flow] (orch) -- (judge);
+\draw[flow] (judge) -- (out);
+
+% Contracts feed into judge
+\draw[contractflow] (jp.north) -- (jp |- judge.south) -- (judge.south);
+\draw[contractflow] (am.north) -- (am |- judge.south) -- (judge.south);
+\draw[contractflow] (os.north) -- (os |- judge.south) -- (judge.south);
+
+% Outputs flow down to validator + aggregator
+\draw[flow] (out.south) -- ++(0,-1.0) -| (val.north);
+\draw[flow] (out.south) -- ++(0,-1.0) -| (agg.north);
+
+% Validator/aggregator -> paper
+\draw[flow] (val.east) -- (val.east -| paper.west) -- (paper.south west);
+\draw[flow] (agg.east) -- (agg.east -| paper.west) -- (paper.south);
+
+% Schema validates outputs
+\draw[contractflow] (os.south) -- ++(0,-1.6) -| (val.north);
+
+% Annotations
+\node[font=\scriptsize, black!60, align=center] at (5.5, 0.55)
+  {frozen contracts};
+\node[font=\scriptsize, black!60] at (1.7, 1.95) {public artifacts};
+\node[font=\scriptsize, black!60] at (12.0, 0.85) {schema-validated\\at emit};
+
+\end{tikzpicture}
+\caption{Audit pipeline. A locked dispatch map enumerates 131 (goal-source,
+witness) pairs across five substrates. The orchestrator hands each pair to
+the LLM-judge under three frozen contracts (the prompt, the verdict-bits to
+cell-label assembly mapping, and the output JSON Schema). The judge emits one
+schema-valid record per identified goal. Post-processing scripts validate
+schema and cascade conformance and produce the cross-substrate aggregates
+that drive the empirical-results section. The judge instrument is uniform
+across all five substrates.}
+\label{fig:pipeline}
+\end{figure}

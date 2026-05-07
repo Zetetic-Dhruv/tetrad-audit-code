@@ -1,0 +1,229 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileObject": "cr:fileObject",
+    "fileProperty": "cr:fileProperty",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "Discovery Tetrad Audit Dataset",
+  "description": "A cross-substrate dataset of process-conformance audits applying the Discovery Tetrad rubric (four invariant gates × two layers × 25-cell taxonomy) to long-horizon LLM-driven research artifacts. Substrates: Formal Learning Theory kernel (Lean 4), Statistical Learning Theory library (Lean 4), First-Proof mathematical research benchmark, AI Scientist v1 (10 papers), AI Scientist v2 (3 ICLR 2025 ICBINB workshop submissions). 282 schema-valid per-goal JSON records. LLM-judge: Claude Opus 4.7 across all five substrates; an additional GPT-5.5 Pro judge and human grading were applied to the First-Proof subset for inter-judge concordance.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "url": "REDACTED-FOR-DOUBLE-BLIND-REVIEW",
+  "version": "1.0",
+  "datePublished": "2026-05-07",
+  "citeAs": "REDACTED-FOR-DOUBLE-BLIND-REVIEW",
+  "keywords": [
+    "evaluation methodology",
+    "audit dataset",
+    "LLM-as-judge",
+    "process-conformance",
+    "AI scientist evaluation",
+    "formal mathematics evaluation",
+    "Lean 4",
+    "discovery tetrad"
+  ],
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "REDACTED FOR DOUBLE-BLIND REVIEW"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "REDACTED FOR DOUBLE-BLIND REVIEW"
+  },
+  "isLiveDataset": false,
+  "personalSensitiveInformation": "none. The dataset contains audits of public mathematical and scientific artifacts and does not collect personal information.",
+  "dataBiases": "The judge instrument is a single closed-weight LLM (Claude Opus 4.7) at fixed temperature with frozen prompts; verdicts inherit the model's biases. Sophism detection on borderline cases may carry false-positive or false-negative risk in the absence of multi-judge consensus. Three substrates (FLT, FP, AS-v1) include the authors' own work as audited artifacts; the audit application to those substrates is identical to the application on the third-party substrates (SLT, AS-v2), but readers should consider this provenance when using the dataset.",
+  "dataCollection": "For each (goal_source, witness) pair in the locked dispatch_map.json, the LLM-judge applied the locked judge_prompt.txt and assembly_mapping.json under per-substrate extraction policies, emitting one schema-valid JSON record per identified goal. Outputs were validated against output_schema.json. The pipeline is deterministic with respect to the frozen prompt and assembly mapping; LLM stochasticity is the dominant residual source of run-to-run variance.",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "judge_prompt",
+      "name": "judge_prompt.txt",
+      "description": "Frozen LLM-judge prompt; the contract applied verbatim across all five substrates.",
+      "contentUrl": "judge_prompt.txt",
+      "encodingFormat": "text/plain",
+      "sha256": "to-be-computed-at-release"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "assembly_mapping",
+      "name": "assembly_mapping.json",
+      "description": "Verdict-bits → cell-number → cell-label proto-compiler. Single source of truth for the layer-aware naming of the four-gate evaluation.",
+      "contentUrl": "assembly_mapping.json",
+      "encodingFormat": "application/json",
+      "sha256": "to-be-computed-at-release"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "output_schema",
+      "name": "output_schema.json",
+      "description": "JSON Schema (Draft 7) for per-goal audit records.",
+      "contentUrl": "output_schema.json",
+      "encodingFormat": "application/json",
+      "sha256": "to-be-computed-at-release"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "dispatch_map",
+      "name": "dispatch_map.json",
+      "description": "Locked (goal_source, witness) pair manifest specifying every audit-unit dispatched by the orchestrator.",
+      "contentUrl": "dispatch_map.json",
+      "encodingFormat": "application/json",
+      "sha256": "to-be-computed-at-release"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "outputs_flt",
+      "name": "FLT audit outputs",
+      "description": "Per-goal audit records for the Formal Learning Theory kernel substrate.",
+      "encodingFormat": "application/json",
+      "includes": "flt/outputs/*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "outputs_slt",
+      "name": "SLT audit outputs",
+      "description": "Per-goal audit records for the Statistical Learning Theory library substrate.",
+      "encodingFormat": "application/json",
+      "includes": "slt/outputs/*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "outputs_asv1",
+      "name": "AI Scientist v1 audit outputs",
+      "description": "Per-goal audit records for the 10 AI Scientist v1 example papers.",
+      "encodingFormat": "application/json",
+      "includes": "asv1/outputs/*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "outputs_asv2",
+      "name": "AI Scientist v2 audit outputs",
+      "description": "Per-goal audit records for the 3 AI Scientist v2 ICLR 2025 ICBINB workshop submissions.",
+      "encodingFormat": "application/json",
+      "includes": "asv2/outputs/**/*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "outputs_fp",
+      "name": "First-Proof audit outputs (GPT-5.5 Pro judge, three-way comparison source)",
+      "description": "Per-goal audit records for First-Proof problems P2-P10. Used in the inter-judge concordance appendix together with the Claude Opus 4.7 judge and human grading.",
+      "encodingFormat": "application/json",
+      "includes": "human_audit/gpt_judge_fp/*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "human_audit_pi_grading",
+      "name": "Human-graded gold-standard exemplars",
+      "description": "the authors hand-written exemplar audits used for the appendix walkthroughs (FP Problem 2 + FLT KL Divergence module).",
+      "encodingFormat": "text/markdown",
+      "includes": "human_audit/pi_grading/*.md"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "audit_record",
+      "name": "Audit record",
+      "description": "One per-goal Discovery Tetrad audit record. Schema is fully specified by output_schema.json; only the headline fields are surfaced here.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "audit_record/goal_id",
+          "name": "goal.id",
+          "description": "Deterministic goal identifier per the schema's regex; also the filename stem.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "outputs_flt"},
+            "extract": {"jsonPath": "$.goal.id"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "audit_record/substrate",
+          "name": "goal.substrate",
+          "description": "Substrate identifier ∈ {fp, flt, slt, asv1, asv2}.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "outputs_flt"},
+            "extract": {"jsonPath": "$.goal.substrate"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "audit_record/goal_cell",
+          "name": "goal_layer.outcome.cell",
+          "description": "Goal-layer cell id ∈ {1A,1B,2A,2B,3A,3B,4A,4B,5A,5B,6A,6B,7A,7B,8,9}.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "outputs_flt"},
+            "extract": {"jsonPath": "$.outcome.cell"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "audit_record/goal_cell_label",
+          "name": "goal_layer.outcome.cell_name",
+          "description": "Goal-layer cell label per the locked assembly mapping.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {"@id": "outputs_flt"},
+            "extract": {"jsonPath": "$.outcome.cell_name"}
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "audit_record/goal_sophism_flag",
+          "name": "goal_layer.outcome.sophism_flag",
+          "description": "True if sophism detection rule fires at goal layer.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {"@id": "outputs_flt"},
+            "extract": {"jsonPath": "$.outcome.sophism_flag"}
+          }
+        }
+      ]
+    }
+  ]
+}

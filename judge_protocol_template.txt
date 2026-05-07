@@ -1,0 +1,92 @@
+================================================================================
+JUDGE PROTOCOL — per-run record
+================================================================================
+
+This file is a TEMPLATE. Each substrate run should drop a copy of this file
+named `judge_protocol_<substrate>_<YYYYMMDD>_<HHMM>.txt` alongside its outputs/
+directory, with the fields filled in. If the running agent forgets to drop
+this file, the same information is recoverable post-hoc by querying outputs/
+(e.g., counting escalations, distinct evaluator strings, timestamp ranges).
+
+The protocol query script (to be written) reads outputs/*.json and emits
+per-substrate aggregates: this template lets the human auditor verify the
+auto-generated aggregates against the agent's locally-recorded protocol.
+
+--------------------------------------------------------------------------------
+RUN METADATA
+--------------------------------------------------------------------------------
+
+substrate:                 <fp|flt|slt|asv1|asv2>
+run_started_utc:           <YYYY-MM-DD HH:MM:SS UTC>
+run_completed_utc:         <YYYY-MM-DD HH:MM:SS UTC>
+agent_orchestrator:        <e.g., claude-opus-4-7 via Agent tool>
+parallel_agents_per_batch: <e.g., 10>
+total_batches:             <integer>
+
+--------------------------------------------------------------------------------
+JUDGE INSTRUMENT
+--------------------------------------------------------------------------------
+
+judge_model:               <e.g., claude-opus-4-7>
+judge_version:             <model snapshot id or release date>
+judge_temperature:         <e.g., 0.0 — DEFAULT FOR DETERMINISTIC AUDIT>
+judge_top_p:               <e.g., 1.0>
+judge_max_tokens:          <e.g., 4096>
+judge_prompt_path:         empirical_analysis/judge_prompt.txt
+judge_prompt_hash_sha256:  <fill in with `shasum -a 256 judge_prompt.txt`>
+
+assembly_mapping_path:     empirical_analysis/assembly_mapping.json
+assembly_mapping_hash:     <fill in>
+
+output_schema_path:        empirical_analysis/output_schema.json
+output_schema_hash:        <fill in>
+
+--------------------------------------------------------------------------------
+CONTEXT CONSTRUCTION
+--------------------------------------------------------------------------------
+
+substrate_context_files:
+  - <e.g., empirical_analysis/flt/SUBSTRATE_README.md>
+  - <e.g., empirical_analysis/flt/VERIFICATION_STATUS.md (operator-internal,
+          NOT passed to the judge prompt)>
+
+unit_of_analysis:          <theorem|problem|hypothesis|sub-hypothesis|argument>
+file_to_goal_mapping:      <how the file was decomposed into goals — e.g.,
+                            "one Lean theorem per goal"; "one paper hypothesis
+                            and N sub-hypotheses per paper">
+
+retrieval_used:            <none|<describe>>
+multi_pass:                <single-pass|multi-pass with consensus rule>
+adjudication:              <none|the authors human spot-check on subset>
+
+--------------------------------------------------------------------------------
+ESCALATION TRACKING
+--------------------------------------------------------------------------------
+
+total_goals_audited:       <integer>
+total_witnesses_audited:   <integer>
+total_steps_audited:       <integer (FP only; 0 elsewhere)>
+
+escalations_by_gate:
+  plausibility:            <count>
+  coherence:               <count>
+  completeness:            <count>
+  invariance:              <count>
+
+escalations_by_layer:
+  goal_layer:              <count>
+  witness_layer:           <count>
+
+escalation_rate_overall:   <count / total_evaluations>
+sophism_flags_total:       <count>
+
+--------------------------------------------------------------------------------
+NOTES (free-form, optional)
+--------------------------------------------------------------------------------
+
+<any anomalies, agent failures, retries, schema-validation failures and
+their resolution, etc.>
+
+================================================================================
+END OF PROTOCOL TEMPLATE
+================================================================================
